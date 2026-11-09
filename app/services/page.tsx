@@ -109,7 +109,6 @@ export default function ServicesPage() {
         t={t}
         locale={locale}
         dark={dark}
-        onToggleDark={() => setDark((d) => !d)}
         onOpenAuth={() => setAuthOpen(true)}
         onLocaleChange={setLocale}
       />

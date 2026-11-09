@@ -103,7 +103,6 @@ export default function HousingPage() {
         t={t}
         locale={locale}
         dark={dark}
-        onToggleDark={() => setDark((d) => !d)}
         onOpenAuth={() => setAuthOpen(true)}
         onLocaleChange={setLocale}
       />

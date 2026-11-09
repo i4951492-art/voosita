@@ -71,8 +71,8 @@ export async function createPayment(
  */
 export function verifyWebhookSignature(
   provider: PaymentProvider,
-  headers: Headers,
-  body: string
+  _headers: Headers,
+  _body: string
 ): boolean {
   if (provider === "mock") return true;
 

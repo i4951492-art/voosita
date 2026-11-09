@@ -8,7 +8,6 @@ import {
   MapPin,
   Briefcase,
   Award,
-  MessageSquare,
   ShieldCheck,
   Heart,
   ChevronLeft,
@@ -107,7 +106,6 @@ export default function ProfilePage() {
         t={t}
         locale={locale}
         dark={dark}
-        onToggleDark={() => setDark((d) => !d)}
         onOpenAuth={() => setAuthOpen(true)}
         onLocaleChange={setLocale}
       />

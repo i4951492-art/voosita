@@ -9,7 +9,6 @@ interface SiteHeaderProps {
   t: Copy;
   locale: Locale;
   dark: boolean;
-  onToggleDark: () => void;
   onOpenAuth: () => void;
   onLocaleChange: (l: Locale) => void;
 }
@@ -18,7 +17,6 @@ export default function SiteHeader({
   t,
   locale,
   dark,
-  onToggleDark,
   onOpenAuth,
   onLocaleChange,
 }: SiteHeaderProps) {

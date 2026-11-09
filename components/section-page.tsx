@@ -64,7 +64,6 @@ export default function SectionPage({ type, items }: SectionPageProps) {
         t={t}
         locale={locale}
         dark={dark}
-        onToggleDark={() => setDark((d) => !d)}
         onOpenAuth={() => setAuthOpen(true)}
         onLocaleChange={setLocale}
       />

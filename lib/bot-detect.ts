@@ -41,7 +41,7 @@ export async function collectBotSignals(): Promise<BotSignals> {
     };
   }
 
-  const nav = navigator as any;
+  const nav = navigator as Navigator & { webdriver?: boolean; deviceMemory?: number; userAgentData?: unknown };
   const ua = nav.userAgent || "";
 
   const webdriver = !!nav.webdriver;
@@ -86,7 +86,7 @@ export async function collectBotSignals(): Promise<BotSignals> {
   }
 
   const missingChrome =
-    /Chrome/i.test(ua) && !(window as any).chrome;
+    /Chrome/i.test(ua) && !(window as Window & { chrome?: unknown }).chrome;
 
   // Score
   let score = 0;

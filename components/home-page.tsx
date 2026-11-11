@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import {
   UserRound,
   ChevronDown,
@@ -13,7 +14,6 @@ import {
   KeyRound,
   ChevronLeft,
   ChevronRight,
-  X,
   Wrench,
   Code2,
   GraduationCap,
@@ -23,11 +23,13 @@ import {
   Sun,
 } from "lucide-react";
 import { copy, type Locale } from "@/lib/i18n";
+import AdBanner from "./ad-banner";
+import BrandLogo from "./brand-logo";
 import AuthModal from "./auth-modal";
+import { fetchListings, formatPrice, type Listing } from "@/lib/listings";
+import { getCurrentUser, USER_EVENT, type User } from "@/lib/store";
 
 const SLIDES = ["samarkand", "bukhara", "mountains", "tashkent"] as const;
-const SALARIES = ["15 000 000 so‘m", "12 000 000 so‘m", "10 000 000 so‘m"];
-const PRICES = ["4 500 000", "6 200 000"];
 
 const CARD_LINKS = ["/jobs", "/services", "/housing", "/housing"];
 
@@ -35,8 +37,12 @@ export default function HomePage() {
   const [locale, setLocale] = useState<Locale>("uz-Latn");
   const [dark, setDark] = useState(false);
   const [slide, setSlide] = useState(0);
-  const [aboutOpen, setAboutOpen] = useState(false);
   const [authOpen, setAuthOpen] = useState(false);
+  const [query, setQuery] = useState("");
+  const [user, setUser] = useState<User | null>(null);
+  const [jobs, setJobs] = useState<Listing[]>([]);
+  const [homes, setHomes] = useState<Listing[]>([]);
+  const router = useRouter();
 
   const t = copy[locale];
 
@@ -48,19 +54,33 @@ export default function HomePage() {
   }, []);
 
   useEffect(() => {
-    const savedLocale = localStorage.getItem("voosita-locale") as Locale | null;
-    const savedDark = localStorage.getItem("voosita-dark") === "1";
+    const savedLocale = localStorage.getItem("voosita_locale") as Locale | null;
+    const savedDark = localStorage.getItem("voosita_dark") === "1";
     if (savedLocale && copy[savedLocale]) setLocale(savedLocale);
     if (savedDark) setDark(true);
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("voosita-locale", locale);
+    localStorage.setItem("voosita_locale", locale);
   }, [locale]);
 
   useEffect(() => {
-    localStorage.setItem("voosita-dark", dark ? "1" : "0");
+    localStorage.setItem("voosita_dark", dark ? "1" : "0");
   }, [dark]);
+
+  useEffect(() => {
+    setUser(getCurrentUser());
+    const sync = () => setUser(getCurrentUser());
+    window.addEventListener(USER_EVENT, sync);
+    fetchListings({ type: "job", limit: 3 }).then(setJobs).catch(() => undefined);
+    fetchListings({ type: "housing", limit: 2 }).then(setHomes).catch(() => undefined);
+    return () => window.removeEventListener(USER_EVENT, sync);
+  }, []);
+
+  const goSearch = () => {
+    const q = query.trim();
+    router.push(q ? `/search?q=${encodeURIComponent(q)}` : "/search");
+  };
 
   const nextSlide = useCallback(() => {
     setSlide((s) => (s + 1) % SLIDES.length);
@@ -69,10 +89,6 @@ export default function HomePage() {
   const prevSlide = useCallback(() => {
     setSlide((s) => (s - 1 + SLIDES.length) % SLIDES.length);
   }, []);
-
-  const handleStub = (label: string) => {
-    alert(`${label} — ${t.comingSoon}`);
-  };
 
   const serviceIcons = [
     { Icon: BriefcaseBusiness, cls: "blue" },
@@ -100,24 +116,26 @@ export default function HomePage() {
         <div className="hero-content">
           <div className="topbar">
             <div className="topbar-left">
-              <button className="pill-btn" onClick={() => setAuthOpen(true)}>
+              <button
+                className="pill-btn"
+                onClick={() => (user ? router.push("/my-profile") : setAuthOpen(true))}
+              >
                 <UserRound size={16} />
-                {t.profile}
+                {user ? user.name.split(" ")[0] : t.profile}
                 <ChevronDown size={14} />
               </button>
             </div>
 
             <div className="logo">
-              <div className="logo-v">V</div>
-              <span className="logo-text">VOOSITA</span>
+              <BrandLogo height={46} />
             </div>
 
             <div className="topbar-right">
-              <button className="pill-btn" onClick={() => setAboutOpen(true)}>
+              <Link href="/settings" className="pill-btn">
                 <Settings size={16} />
                 {t.settings}
                 <ChevronDown size={14} />
-              </button>
+              </Link>
             </div>
           </div>
 
@@ -133,15 +151,13 @@ export default function HomePage() {
               <input
                 type="text"
                 placeholder={t.search}
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
                 onKeyDown={(e) => {
-                  if (e.key === "Enter") handleStub("Поиск");
+                  if (e.key === "Enter") goSearch();
                 }}
               />
-              <button
-                className="search-btn"
-                onClick={() => handleStub("Поиск")}
-                aria-label="Search"
-              >
+              <button className="search-btn" onClick={goSearch} aria-label="Search">
                 <Search size={20} />
               </button>
             </div>
@@ -169,9 +185,14 @@ export default function HomePage() {
               })}
             </div>
 
-            <button className="about-btn" onClick={() => setAboutOpen(true)}>
-              {t.about}
-            </button>
+            <div style={{ display: "flex", gap: 10, justifyContent: "center", flexWrap: "wrap" }}>
+              <Link href="/about" className="about-btn">
+                {t.about}
+              </Link>
+              <Link href="/new" className="about-btn">
+                Разместить объявление
+              </Link>
+            </div>
           </div>
         </div>
 
@@ -197,6 +218,10 @@ export default function HomePage() {
       </section>
 
       {/* Dashboard */}
+      <div className="vp-home-ad">
+        <AdBanner slot="home" />
+      </div>
+
       <section className="dashboard">
         <div className="panel">
           <div className="panel-header">
@@ -209,7 +234,7 @@ export default function HomePage() {
             {t.services.map((name, i) => {
               const Icon = serviceListIcons[i];
               return (
-                <li key={i} onClick={() => (window.location.href = "/services")}>
+                <li key={i} onClick={() => router.push("/services")} style={{ cursor: "pointer" }}>
                   <span className="icon">
                     <Icon size={16} />
                   </span>
@@ -227,20 +252,22 @@ export default function HomePage() {
               {t.all}
             </Link>
           </div>
-          {t.vacancyNames.map((name, i) => (
+          {jobs.length === 0 && (
+            <p style={{ fontSize: 13, color: "var(--text-muted)" }}>
+              Пока нет вакансий. <Link href="/new" className="link">Разместить первую</Link>
+            </p>
+          )}
+          {jobs.map((j) => (
             <div
-              key={i}
+              key={j.id}
               className="vacancy-item"
-              onClick={() => (window.location.href = "/jobs")}
+              onClick={() => router.push(`/listing?id=${j.id}`)}
               style={{ cursor: "pointer" }}
             >
-              <h4>{name}</h4>
+              <h4>{j.title}</h4>
               <div className="meta">
-                <span className="salary">{SALARIES[i]}</span>
-                <span>Toshkent</span>
-                <span>
-                  {i + 1} {t.daysAgo}
-                </span>
+                <span className="salary">{formatPrice(j)}</span>
+                {j.city && <span>{j.city}</span>}
               </div>
             </div>
           ))}
@@ -253,26 +280,29 @@ export default function HomePage() {
               {t.all}
             </Link>
           </div>
-          {t.homes.map((name, i) => (
+          {homes.length === 0 && (
+            <p style={{ fontSize: 13, color: "var(--text-muted)" }}>
+              Пока нет объявлений. <Link href="/new" className="link">Разместить первое</Link>
+            </p>
+          )}
+          {homes.map((h, i) => (
             <div
-              key={i}
+              key={h.id}
               className="listing-item"
-              onClick={() => (window.location.href = "/housing")}
+              onClick={() => router.push(`/listing?id=${h.id}`)}
               style={{ cursor: "pointer" }}
             >
               <div
                 className="listing-thumb"
-                style={{
-                  background: `linear-gradient(135deg, ${
-                    i === 0 ? "#a8c0e8, #7a9ad0" : "#c5b8e0, #9a88c8"
-                  })`,
-                }}
+                style={
+                  h.photoUrls[0]
+                    ? { backgroundImage: `url(${h.photoUrls[0]})`, backgroundSize: "cover", backgroundPosition: "center" }
+                    : { background: `linear-gradient(135deg, ${i === 0 ? "#a8c0e8, #7a9ad0" : "#c5b8e0, #9a88c8"})` }
+                }
               />
               <div className="listing-info">
-                <h4>{name}</h4>
-                <div className="price">
-                  {PRICES[i]} so‘m {t.perMonth}
-                </div>
+                <h4>{h.title}</h4>
+                <div className="price">{formatPrice(h)}</div>
                 <Heart size={14} className="heart" />
               </div>
             </div>
@@ -281,9 +311,9 @@ export default function HomePage() {
 
         <div className="panel promo-panel">
           <h3>{t.banner}</h3>
-          <button className="btn" onClick={() => setAboutOpen(true)}>
+          <Link href="/about" className="btn">
             {t.details}
-          </button>
+          </Link>
         </div>
       </section>
 
@@ -323,20 +353,6 @@ export default function HomePage() {
           />
         </div>
       </footer>
-
-      {/* About modal */}
-      <div
-        className={`overlay ${aboutOpen ? "open" : ""}`}
-        onClick={() => setAboutOpen(false)}
-      />
-      <div className={`about-pop ${aboutOpen ? "open" : ""}`}>
-        <button className="close-btn" onClick={() => setAboutOpen(false)}>
-          <X size={16} />
-        </button>
-        <h3>VOOSITA</h3>
-        <p>{t.aboutText}</p>
-        <p style={{ fontSize: 13, opacity: 0.8 }}>{t.banner}</p>
-      </div>
 
       <AuthModal
         open={authOpen}

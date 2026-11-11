@@ -1,169 +1,235 @@
+/**
+ * UI texts for the three supported locales.
+ * Keys are used across pages and components. Add new keys to all three
+ * dictionaries, or TypeScript will fail the build.
+ */
+
 export type Locale = "uz-Latn" | "uz-Cyrl" | "ru";
 
-export const copy = {
-  "uz-Latn": {
-    profile: "Mening profilim",
-    settings: "Sozlamalar",
-    search: "Xizmat yoki mutaxassisni qidiring...",
-    headline: "O‘zbekistonda imkoniyatlar endi bir joyda!",
-    subtitle: "Ish, xizmat va uy-joy topishning eng qulay platformasi",
-    cards: [
-      ["Ish topish", "Mutaxassislar uchun"],
-      ["Mutaxassis topish", "Buyurtmachilar uchun"],
-      ["Uy-joy topish", "Ijarachilar uchun"],
-      ["Uy-joy ijaraga berish", "Uy egalari uchun"],
-    ],
-    about: "Sayt haqida",
-    popular: "Mashhur xizmatlar",
-    all: "Barchasi",
-    vacancies: "Yangi vakansiyalar",
-    listings: "Yangi e’lonlar",
-    banner: "VOOSITA — Sizning ishonchli hamkoringiz!",
-    details: "Batafsil ma’lumot",
-    language: "Tilni tanlang",
-    theme: "Tungi rejim",
-    services: ["Ustalar xizmatlari", "Dasturlash va IT", "Maktab repetitorlari", "Transport xizmatlari"],
-    vacancyNames: ["Frontend dasturchi", "Marketing menejeri", "Sotuv menejeri"],
-    homes: ["2 xonali kvartira, Chilonzor", "3 xonali kvartira, Yakkasaroy"],
-    aboutText: "VOOSITA — O‘zbekiston imkoniyatlarini bir joyga jamlagan platforma. Ish, xizmat va uy-joy — hammasi bir tizimda.",
-    daysAgo: "kun oldin",
-    perMonth: "/ oy",
-    photoNote: "Fotolar: Samarkand, Buxoro, Chimgan, Toshkent",
-    // New
-    jobsTitle: "Ish topish",
-    jobsSubtitle: "O‘zingizga mos vakansiyani toping",
-    servicesTitle: "Mutaxassis topish",
-    servicesSubtitle: "Ishonchli mutaxassislar va xizmatlar",
-    housingTitle: "Uy-joy topish",
-    housingSubtitle: "Ijara uchun kvartiralar va uylar",
-    login: "Kirish",
-    register: "Ro‘yxatdan o‘tish",
-    email: "Email",
-    password: "Parol",
-    name: "Ism",
-    phone: "Telefon",
-    submitLogin: "Kirish",
-    submitRegister: "Ro‘yxatdan o‘tish",
-    noAccount: "Hisobingiz yo‘qmi?",
-    hasAccount: "Allaqachon hisobingiz bormi?",
-    backHome: "Bosh sahifa",
-    filter: "Filtr",
-    city: "Shahar",
-    salary: "Maosh",
-    apply: "Ariza topshirish",
-    contact: "Bog‘lanish",
-    priceFrom: "dan",
-    rooms: "xona",
-    comingSoon: "Tez orada to‘liq funksiya qo‘shiladi",
-  },
-  "uz-Cyrl": {
-    profile: "Менинг профилим",
-    settings: "Созламалар",
-    search: "Хизмат ёки мутахассисни қидиринг...",
-    headline: "Ўзбекистонда имкониятлар энди бир жойда!",
-    subtitle: "Иш, хизмат ва уй-жой топишнинг энг қулай платформаси",
-    cards: [
-      ["Иш топиш", "Мутахассислар учун"],
-      ["Мутахассис топиш", "Буюртмачилар учун"],
-      ["Уй-жой топиш", "Ижарачилар учун"],
-      ["Уй-жой ижарага бериш", "Уй эгалари учун"],
-    ],
-    about: "Сайт ҳақида",
-    popular: "Машҳур хизматлар",
-    all: "Барчаси",
-    vacancies: "Янги вакансиялар",
-    listings: "Янги эълонлар",
-    banner: "VOOSITA — Сизнинг ишончли ҳамкорингиз!",
-    details: "Батафсил маълумот",
-    language: "Тилни танланг",
-    theme: "Тунги режим",
-    services: ["Усталар хизматлари", "Дастурлаш ва IT", "Мактаб репетиторлари", "Транспорт хизматлари"],
-    vacancyNames: ["Frontend дастурчи", "Маркетинг менежери", "Сотув менежери"],
-    homes: ["2 хонали квартира, Чилонзор", "3 хонали квартира, Яккасарой"],
-    aboutText: "VOOSITA — Ўзбекистон имкониятларини бир жойга жамлаган платформа. Иш, хизмат ва уй-жой — ҳаммаси бир тизимда.",
-    daysAgo: "кун олдин",
-    perMonth: "/ ой",
-    photoNote: "Фотолар: Самарқанд, Бухоро, Чимган, Тошкент",
-    jobsTitle: "Иш топиш",
-    jobsSubtitle: "Ўзингизга мос вакансияни топинг",
-    servicesTitle: "Мутахассис топиш",
-    servicesSubtitle: "Ишончли мутахассислар ва хизматлар",
-    housingTitle: "Уй-жой топиш",
-    housingSubtitle: "Ижара учун квартиралар ва уйлар",
-    login: "Кириш",
-    register: "Рўйхатдан ўтиш",
-    email: "Email",
-    password: "Парол",
-    name: "Исм",
-    phone: "Телефон",
-    submitLogin: "Кириш",
-    submitRegister: "Рўйхатдан ўтиш",
-    noAccount: "Ҳисобингиз йўқми?",
-    hasAccount: "Аллақачон ҳисобингиз борми?",
-    backHome: "Бош саҳифа",
-    filter: "Фильтр",
-    city: "Шаҳар",
-    salary: "Маош",
-    apply: "Ариза топшириш",
-    contact: "Боғланиш",
-    priceFrom: "дан",
-    rooms: "хона",
-    comingSoon: "Тез орада тўлиқ функция қўшилади",
-  },
-  ru: {
-    profile: "Мой профиль",
-    settings: "Настройки",
-    search: "Найдите услугу или специалиста...",
-    headline: "Возможности Узбекистана — теперь в одном месте!",
-    subtitle: "Удобная платформа для поиска работы, услуг и жилья",
-    cards: [
-      ["Найти работу", "Для специалистов"],
-      ["Найти специалиста", "Для заказчиков"],
-      ["Найти жильё", "Для арендаторов"],
-      ["Сдать жильё", "Для владельцев"],
-    ],
-    about: "О сайте",
-    popular: "Популярные услуги",
-    all: "Все",
-    vacancies: "Новые вакансии",
-    listings: "Новые объявления",
-    banner: "VOOSITA — ваш надёжный партнёр!",
-    details: "Подробнее",
-    language: "Выберите язык",
-    theme: "Ночная тема",
-    services: ["Услуги мастеров", "Разработка и IT", "Репетиторы", "Транспортные услуги"],
-    vacancyNames: ["Frontend-разработчик", "Менеджер по маркетингу", "Менеджер по продажам"],
-    homes: ["2-комнатная квартира, Чиланзар", "3-комнатная квартира, Яккасарай"],
-    aboutText: "VOOSITA — платформа, объединяющая возможности Узбекистана. Работа, услуги и жильё — всё в одной системе.",
-    daysAgo: "дн. назад",
-    perMonth: "/ мес",
-    photoNote: "Фото: Самарканд, Бухара, Чимган, Ташкент",
-    jobsTitle: "Поиск работы",
-    jobsSubtitle: "Найдите подходящую вакансию",
-    servicesTitle: "Поиск специалистов",
-    servicesSubtitle: "Надёжные мастера и услуги",
-    housingTitle: "Поиск жилья",
-    housingSubtitle: "Квартиры и дома в аренду",
-    login: "Войти",
-    register: "Регистрация",
-    email: "Email",
-    password: "Пароль",
-    name: "Имя",
-    phone: "Телефон",
-    submitLogin: "Войти",
-    submitRegister: "Зарегистрироваться",
-    noAccount: "Нет аккаунта?",
-    hasAccount: "Уже есть аккаунт?",
-    backHome: "На главную",
-    filter: "Фильтр",
-    city: "Город",
-    salary: "Зарплата",
-    apply: "Откликнуться",
-    contact: "Связаться",
-    priceFrom: "от",
-    rooms: "комн.",
-    comingSoon: "Полный функционал появится в следующем этапе",
-  },
-} as const;
+export type Copy = {
+  about: string;
+  aboutText: string;
+  all: string;
+  apply: string;
+  backHome: string;
+  banner: string;
+  cards: [string, string][];
+  comingSoon: string;
+  contact: string;
+  daysAgo: string;
+  details: string;
+  email: string;
+  hasAccount: string;
+  headline: string;
+  homes: string[];
+  housingSubtitle: string;
+  housingTitle: string;
+  jobsSubtitle: string;
+  jobsTitle: string;
+  language: string;
+  listings: string;
+  login: string;
+  messages: string;
+  name: string;
+  noAccount: string;
+  password: string;
+  perMonth: string;
+  phone: string;
+  photoNote: string;
+  popular: string;
+  pricing: string;
+  profile: string;
+  register: string;
+  rooms: string;
+  search: string;
+  services: string[];
+  servicesSubtitle: string;
+  servicesTitle: string;
+  settings: string;
+  submitLogin: string;
+  submitRegister: string;
+  subtitle: string;
+  theme: string;
+  vacancies: string;
+  vacancyNames: string[];
+};
 
-export type Copy = (typeof copy)[Locale];
+const uzLatn: Copy = {
+  about: "Biz haqimizda",
+  aboutText:
+    "VOOSITA WORK — O‘zbekiston uchun yagona platforma: ish, xizmat va uy-joy e’lonlari. Barcha asosiy imkoniyatlar bepul.",
+  all: "Barchasi",
+  apply: "Ariza yuborish",
+  backHome: "Bosh sahifa",
+  banner: "VOOSITA WORK — barcha e’lonlar bepul",
+  cards: [
+    ["Ish", "Vakansiyalar va ish qidiruvchilar"],
+    ["Xizmatlar", "Ustalar va mutaxassislar"],
+    ["Uy-joy", "Ijara va sotuv e’lonlari"],
+    ["Ijara", "Kvartiralar va xonalar"],
+  ],
+  comingSoon: "Tez orada",
+  contact: "Bog‘lanish",
+  daysAgo: "kun oldin",
+  details: "Batafsil",
+  email: "Email",
+  hasAccount: "Akkauntingiz bormi? Kirish",
+  headline: "O‘zbekiston uchun yagona platforma",
+  homes: ["2 xonali kvartira, Chilonzor", "3 xonali kvartira, Yakkasaroy"],
+  housingSubtitle: "Ijara va sotuv uchun uy-joy e’lonlari",
+  housingTitle: "Uy-joy",
+  jobsSubtitle: "Ochiq vakansiyalar",
+  jobsTitle: "Ish",
+  language: "Til",
+  listings: "Uy-joy e’lonlari",
+  login: "Kirish",
+  messages: "Xabarlar",
+  name: "Ismingiz",
+  noAccount: "Akkaunt yo‘qmi? Ro‘yxatdan o‘tish",
+  password: "Parol",
+  perMonth: "oyiga",
+  phone: "Telefon",
+  photoNote: "Fotolar namuna uchun",
+  popular: "Mashhur xizmatlar",
+  pricing: "Tariflar",
+  profile: "Profil",
+  register: "Ro‘yxatdan o‘tish",
+  rooms: "xona",
+  search: "Ish, xizmat yoki uy-joy qidirish",
+  services: ["Ustalar", "Dasturchilar", "Repetitorlar", "Transport"],
+  servicesSubtitle: "Tekshirilgan ustalar va mutaxassislar",
+  servicesTitle: "Xizmatlar",
+  settings: "Sozlamalar",
+  submitLogin: "Kirish",
+  submitRegister: "Ro‘yxatdan o‘tish",
+  subtitle: "Ish topish, xizmat tanlash va uy-joy ijaraga olish — bepul",
+  theme: "Qorong‘u tema",
+  vacancies: "Vakansiyalar",
+  vacancyNames: [
+    "Frontend dasturchi",
+    "Marketing menejeri",
+    "Sotuv bo‘yicha mutaxassis",
+  ],
+};
+
+const uzCyrl: Copy = {
+  about: "Биз ҳақимизда",
+  aboutText:
+    "VOOSITA WORK — Ўзбекистон учун ягона платформа: иш, хизмат ва уй-жой эълонлари. Барча асосий имкониятлар бепул.",
+  all: "Барчаси",
+  apply: "Ариза юбориш",
+  backHome: "Бош саҳифа",
+  banner: "VOOSITA WORK — барча эълонлар бепул",
+  cards: [
+    ["Иш", "Вакансиялар ва иш қидирувчилар"],
+    ["Хизматлар", "Усталар ва мутахассислар"],
+    ["Уй-жой", "Ижара ва сотув эълонлари"],
+    ["Ижара", "Квартиралар ва хоналар"],
+  ],
+  comingSoon: "Тез орада",
+  contact: "Боғланиш",
+  daysAgo: "кун олдин",
+  details: "Батафсил",
+  email: "Email",
+  hasAccount: "Аккаунтингиз борми? Кириш",
+  headline: "Ўзбекистон учун ягона платформа",
+  homes: ["2 хонали квартира, Чилонзор", "3 хонали квартира, Яккасарой"],
+  housingSubtitle: "Ижара ва сотув учун уй-жой эълонлари",
+  housingTitle: "Уй-жой",
+  jobsSubtitle: "Очиқ вакансиялар",
+  jobsTitle: "Иш",
+  language: "Тил",
+  listings: "Уй-жой эълонлари",
+  login: "Кириш",
+  messages: "Хабарлар",
+  name: "Исмингиз",
+  noAccount: "Аккаунт йўқми? Рўйхатдан ўтиш",
+  password: "Парол",
+  perMonth: "ойига",
+  phone: "Телефон",
+  photoNote: "Суратлар намуна учун",
+  popular: "Машҳур хизматлар",
+  pricing: "Тарифлар",
+  profile: "Профил",
+  register: "Рўйхатдан ўтиш",
+  rooms: "хона",
+  search: "Иш, хизмат ёки уй-жой қидириш",
+  services: ["Усталар", "Дастурчилар", "Репетиторлар", "Транспорт"],
+  servicesSubtitle: "Текширилган усталар ва мутахассислар",
+  servicesTitle: "Хизматлар",
+  settings: "Созламалар",
+  submitLogin: "Кириш",
+  submitRegister: "Рўйхатдан ўтиш",
+  subtitle: "Иш топиш, хизмат танлаш ва уй-жой ижарага олиш — бепул",
+  theme: "Қоронғи мавзу",
+  vacancies: "Вакансиялар",
+  vacancyNames: [
+    "Frontend дастурчи",
+    "Маркетинг менежери",
+    "Савдо бўйича мутахассис",
+  ],
+};
+
+const ru: Copy = {
+  about: "О проекте",
+  aboutText:
+    "VOOSITA WORK — единая платформа для Узбекистана: поиск работы, специалистов и жилья. Все основные возможности бесплатны.",
+  all: "Все",
+  apply: "Откликнуться",
+  backHome: "На главную",
+  banner: "VOOSITA WORK — все объявления бесплатно",
+  cards: [
+    ["Работа", "Вакансии и соискатели"],
+    ["Услуги", "Мастера и специалисты"],
+    ["Жильё", "Объявления о продаже"],
+    ["Аренда", "Квартиры и комнаты"],
+  ],
+  comingSoon: "Скоро",
+  contact: "Связаться",
+  daysAgo: "дн. назад",
+  details: "Подробнее",
+  email: "Email",
+  hasAccount: "Уже есть аккаунт? Войти",
+  headline: "Единая платформа для Узбекистана",
+  homes: ["2-комн. квартира, Чиланзар", "3-комн. квартира, Яккасарайский р-н"],
+  housingSubtitle: "Объявления об аренде и продаже жилья",
+  housingTitle: "Жильё",
+  jobsSubtitle: "Открытые вакансии",
+  jobsTitle: "Работа",
+  language: "Язык",
+  listings: "Объявления о жилье",
+  login: "Войти",
+  messages: "Сообщения",
+  name: "Ваше имя",
+  noAccount: "Нет аккаунта? Регистрация",
+  password: "Пароль",
+  perMonth: "в месяц",
+  phone: "Телефон",
+  photoNote: "Фото приведены для примера",
+  popular: "Популярные услуги",
+  pricing: "Тарифы",
+  profile: "Профиль",
+  register: "Регистрация",
+  rooms: "комн.",
+  search: "Поиск работы, услуг или жилья",
+  services: ["Мастера", "Программисты", "Репетиторы", "Транспорт"],
+  servicesSubtitle: "Проверенные мастера и специалисты",
+  servicesTitle: "Услуги",
+  settings: "Настройки",
+  submitLogin: "Войти",
+  submitRegister: "Зарегистрироваться",
+  subtitle: "Поиск работы, услуг и жилья в одном месте — бесплатно",
+  theme: "Тёмная тема",
+  vacancies: "Вакансии",
+  vacancyNames: [
+    "Frontend-разработчик",
+    "Менеджер по маркетингу",
+    "Специалист по продажам",
+  ],
+};
+
+export const copy: Record<Locale, Copy> = {
+  "uz-Latn": uzLatn,
+  "uz-Cyrl": uzCyrl,
+  ru,
+};

@@ -1,23 +1,18 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import BotGuard from "@/components/bot-guard";
+import AuthSync from "@/components/auth-sync";
 
 export const metadata: Metadata = {
-  title: "VOOSITA — Imkoniyatlar bir joyda",
-  description:
-    "VOOSITA — O‘zbekistonda ish, xizmat va uy-joy topish platformasi. Работа, услуги и жильё в одном месте.",
-  keywords: ["VOOSITA", "Uzbekistan", "jobs", "services", "housing", "Tashkent"],
+  title: { default: "VOOSITA WORK", template: "%s · VOOSITA WORK" },
+  description: "VOOSITA WORK: ish, xizmat va uy-joy e’lonlari. Barcha asosiy imkoniyatlar bepul.",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="uz">
       <body>
-        <BotGuard>{children}</BotGuard>
+        <AuthSync />
+        {children}
       </body>
     </html>
   );
